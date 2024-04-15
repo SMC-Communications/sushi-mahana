@@ -1,0 +1,19 @@
+{
+  "name": "sushi-mahana",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "serve",
+    "build": "./node_modules/.bin/esbuild index.js --bundle --outfile=dist/index.js --watch --platform=node",
+    "build-file": "node builder.js"
+  },
+  "author": "Justin Everett - SMC Communications",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.20.2",
+    "gsap": "file:gsap-bonus.tgz",
+    "serve": "^14.2.1"
+  }
+}
