@@ -7083,7 +7083,9 @@ if (href.search("webflow") >= 0) {
 var smoother;
 document.addEventListener("DOMContentLoaded", (event) => {
   let smoothContent = document.querySelector("#smooth-content");
+  console.log("smoothContent:", smoothContent);
   let smooth = smoothContent.dataset.smooth;
+  console.log("smooth:", smooth);
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!mediaQuery.matches) {
     createSmoother(Number(smooth));
@@ -7119,12 +7121,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
   observer.observe(smoothContent, config);
 });
 function createSmoother(smooth) {
+  console.log("Creating smoother...");
   smoother = ScrollSmoother.create({
     wrapper: "#smooth-wrapper",
     content: "#smooth-content",
-    smooth: 2,
+    smooth,
     effects: true
   });
+  console.log("Smoother:", smoother);
 }
 /*! Bundled license information:
 
