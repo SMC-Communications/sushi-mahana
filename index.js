@@ -25,14 +25,14 @@ document.addEventListener('DOMContentLoaded', (event)=> {
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (!mediaQuery.matches){
-        createSmoother(smooth)
+        createSmoother(Number(smooth))
     };
     mediaQuery.addEventListener('change', () => {
         console.log(mediaQuery.media, mediaQuery.matches);
         if (mediaQuery.matches && smoother) {
             smoother.kill();
         } else if (!mediaQuery.matches) {
-            createSmoother(smooth);
+            createSmoother(Number(smooth));
         }
     });
 

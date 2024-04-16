@@ -7086,7 +7086,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let smooth = smoothContent.dataset.smooth;
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!mediaQuery.matches) {
-    createSmoother(smooth);
+    createSmoother(Number(smooth));
   }
   ;
   mediaQuery.addEventListener("change", () => {
@@ -7094,7 +7094,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (mediaQuery.matches && smoother) {
       smoother.kill();
     } else if (!mediaQuery.matches) {
-      createSmoother(smooth);
+      createSmoother(Number(smooth));
     }
   });
   const config = { attributeFilter: ["data-speed", "data-smooth"], attributeOldValue: true, subtree: true };
