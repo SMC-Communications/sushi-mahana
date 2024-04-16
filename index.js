@@ -17,7 +17,13 @@ if (href.search("webflow") >= 0) {
 
 let smoother
 
-document.addEventListener('DOMContentLoaded', (event)=> {
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", gsapInit);
+  } else {
+    gsapInit();
+  }
+
+function gsapInit() {
     let smoothContent = document.querySelector('#smooth-content');
     console.log("smoothContent:", smoothContent)
     let smooth = smoothContent.dataset.smooth;
@@ -57,7 +63,7 @@ document.addEventListener('DOMContentLoaded', (event)=> {
 
     const observer = new MutationObserver(callback);
     observer.observe(smoothContent, config);
-});
+}
 
 function createSmoother(smooth){
     console.log("Creating smoother...")
