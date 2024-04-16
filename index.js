@@ -11,7 +11,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 gsap.registerPlugin(ScrollTrigger,ScrollSmoother);
 
 let isDevMode = false
-let href = window.location.href
+//let href = window.location.href
 if (href.search("webflow") >= 0) {
     console.log("DEVELOPMENT ENVIRONMENT")
     isDevMode = true;

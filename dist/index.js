@@ -7076,7 +7076,6 @@ _getGSAP5() && gsap3.registerPlugin(ScrollSmoother);
 // index.js
 import_gsap.gsap.registerPlugin(ScrollTrigger2, ScrollSmoother);
 var isDevMode = false;
-var href = window.location.href;
 if (href.search("webflow") >= 0) {
   console.log("DEVELOPMENT ENVIRONMENT");
   isDevMode = true;
