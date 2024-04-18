@@ -7088,13 +7088,12 @@ if (document.readyState === "loading") {
 }
 var DEFAULT_SMOOTH = 2;
 function gsapInit() {
-  let smoothContent = document.querySelector("#smooth-content");
+  let smoothContent = document.querySelector(".page-wrapper");
   console.log("smoothContent:", smoothContent);
   let smooth = smoothContent.dataset.smooth;
   if (smooth === void 0) {
     smooth = Number(DEFAULT_SMOOTH);
   }
-  console.log("smooth:", smooth);
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!mediaQuery.matches) {
     createSmoother(Number(smooth));
@@ -7117,7 +7116,6 @@ function gsapInit() {
           smoother.smooth(Number(smooth));
         }
         if (mutation.attributeName === "data-speed") {
-          console.log(mutation.oldValue);
           if (isDevMode && mutation.oldValue != mutation.target.dataset.speed) {
             smoother.kill();
             createSmoother(Number(smoothContent.dataset.smooth));
@@ -7132,20 +7130,20 @@ function gsapInit() {
 function createSmoother(smooth) {
   console.log("Creating smoother...");
   smoother = ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
+    wrapper: ".site-wrapper",
+    content: ".page-wrapper",
     smooth,
     effects: true
   });
   console.log("Smoother:", smoother);
 }
-translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight + document.querySelector(".navbar").offsetHeight / 2;
+translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - document.querySelector(".anouncement-bar").offsetHeight / 2;
 import_gsap.gsap.to(".navbar_brand", {
   translateY: () => translate + "px",
   scrollTrigger: {
     trigger: "#smooth-wrapper",
     start: "top top",
-    end: () => document.querySelector("body").offsetHeight + "px + bottom",
+    end: () => "+=" + document.querySelector("body").offsetHeight + "px + bottom",
     scrub: true
   }
 });
@@ -7156,6 +7154,19 @@ import_gsap.gsap.to(".navbar_brand", {
     end: () => "+=" + document.querySelector(".navbar_brand").offsetHeight + "px",
     scrub: true
   }
+});
+var spacers = import_gsap.gsap.utils.toArray([".spacer_small", ".spacer_medium"]);
+spacers.forEach((spacer) => {
+  import_gsap.gsap.to(spacer, {
+    scaleY: "1",
+    duration: Math.round(spacer.offsetHeight / 50),
+    delay: 0.5,
+    ease: "expo.out",
+    scrollTrigger: {
+      trigger: spacer,
+      start: "clamp(top 60%)"
+    }
+  });
 });
 /*! Bundled license information:
 
