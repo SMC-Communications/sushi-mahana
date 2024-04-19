@@ -6406,7 +6406,7 @@ var ScrollSmoother = /* @__PURE__ */ function() {
     _mainInstance && _mainInstance.kill();
     _mainInstance = this;
     _context3(this);
-    var _vars = vars, smoothTouch = _vars.smoothTouch, _onUpdate = _vars.onUpdate, onStop = _vars.onStop, smooth = _vars.smooth, onFocusIn = _vars.onFocusIn, normalizeScroll = _vars.normalizeScroll, wholePixels = _vars.wholePixels, content, wrapper, height, mainST, effects, sections, intervalID, wrapperCSS, contentCSS, paused, pausedNormalizer, recordedRefreshScroll, recordedRefreshScrub, allowUpdates, self2 = this, effectsPrefix = vars.effectsPrefix || "", scrollFunc = ScrollTrigger3.getScrollFunc(_win3), smoothDuration = ScrollTrigger3.isTouch === 1 ? smoothTouch === true ? 0.8 : parseFloat(smoothTouch) || 0 : smooth === 0 || smooth === false ? 0 : parseFloat(smooth) || 0.8, speed = smoothDuration && +vars.speed || 1, currentY = 0, delta = 0, startupPhase = 1, tracker = _getVelocityProp3(0), updateVelocity = function updateVelocity2() {
+    var _vars = vars, smoothTouch = _vars.smoothTouch, _onUpdate = _vars.onUpdate, onStop = _vars.onStop, smooth = _vars.smooth, onFocusIn = _vars.onFocusIn, normalizeScroll = _vars.normalizeScroll, wholePixels = _vars.wholePixels, content, wrapper, height, mainST, effects2, sections, intervalID, wrapperCSS, contentCSS, paused, pausedNormalizer, recordedRefreshScroll, recordedRefreshScrub, allowUpdates, self2 = this, effectsPrefix = vars.effectsPrefix || "", scrollFunc = ScrollTrigger3.getScrollFunc(_win3), smoothDuration = ScrollTrigger3.isTouch === 1 ? smoothTouch === true ? 0.8 : parseFloat(smoothTouch) || 0 : smooth === 0 || smooth === false ? 0 : parseFloat(smooth) || 0.8, speed = smoothDuration && +vars.speed || 1, currentY = 0, delta = 0, startupPhase = 1, tracker = _getVelocityProp3(0), updateVelocity = function updateVelocity2() {
       return tracker.update(-currentY);
     }, scroll = {
       y: 0
@@ -6507,18 +6507,18 @@ var ScrollSmoother = /* @__PURE__ */ function() {
         }
       }
     }, adjustParallaxPosition = function adjustParallaxPosition2(triggers, createdAfterEffectWasApplied) {
-      effects.forEach(function(st) {
+      effects2.forEach(function(st) {
         return adjustEffectRelatedTriggers(st, triggers, createdAfterEffectWasApplied);
       });
     }, onRefresh = function onRefresh2() {
       removeScroll();
       requestAnimationFrame(removeScroll);
-      if (effects) {
+      if (effects2) {
         ScrollTrigger3.getAll().forEach(function(st) {
           st._startNative = st.start;
           st._endNative = st.end;
         });
-        effects.forEach(function(st) {
+        effects2.forEach(function(st) {
           var start = st._startClamp || st.start, end = st.autoSpeed ? Math.min(_maxScroll3(), st.end) : start + Math.abs((st.end - start) / st.ratio), offset = end - st.end;
           start -= offset / 2;
           end -= offset / 2;
@@ -6546,11 +6546,11 @@ var ScrollSmoother = /* @__PURE__ */ function() {
     }, addOnRefresh = function addOnRefresh2() {
       return ScrollTrigger3.addEventListener("refresh", onRefresh);
     }, restoreEffects = function restoreEffects2() {
-      return effects && effects.forEach(function(st) {
+      return effects2 && effects2.forEach(function(st) {
         return st.vars.onRefresh(st);
       });
     }, revertEffects = function revertEffects2() {
-      effects && effects.forEach(function(st) {
+      effects2 && effects2.forEach(function(st) {
         return st.vars.onRefreshInit(st);
       });
       return restoreEffects;
@@ -6622,8 +6622,8 @@ var ScrollSmoother = /* @__PURE__ */ function() {
           onRefreshInit: revert,
           onRefresh: updateChange,
           onKill: function onKill(self3) {
-            var i = effects.indexOf(self3);
-            i >= 0 && effects.splice(i, 1);
+            var i = effects2.indexOf(self3);
+            i >= 0 && effects2.splice(i, 1);
             revert();
           },
           onUpdate: function onUpdate(self3) {
@@ -6694,7 +6694,7 @@ var ScrollSmoother = /* @__PURE__ */ function() {
         trigger: target,
         start: position || "top top"
       }), y;
-      if (effects) {
+      if (effects2) {
         startupPhase ? ScrollTrigger3.refresh() : adjustParallaxPosition([st], true);
       }
       y = st.start / (ignoreSpeed ? speed : 1);
@@ -6760,15 +6760,15 @@ var ScrollSmoother = /* @__PURE__ */ function() {
     };
     this.effects = function(targets, config) {
       var _effects;
-      effects || (effects = []);
+      effects2 || (effects2 = []);
       if (!targets) {
-        return effects.slice(0);
+        return effects2.slice(0);
       }
       targets = _toArray2(targets);
       targets.forEach(function(target) {
-        var i2 = effects.length;
+        var i2 = effects2.length;
         while (i2--) {
-          effects[i2].trigger === target && effects[i2].kill();
+          effects2[i2].trigger === target && effects2[i2].kill();
         }
       });
       config = config || {};
@@ -6777,7 +6777,7 @@ var ScrollSmoother = /* @__PURE__ */ function() {
         st = createEffect(targets[i], speed2, lag, i, effectsPadding);
         st && effectsToAdd.push(st);
       }
-      (_effects = effects).push.apply(_effects, effectsToAdd);
+      (_effects = effects2).push.apply(_effects, effectsToAdd);
       config.refresh !== false && ScrollTrigger3.refresh();
       return effectsToAdd;
     };
@@ -6868,11 +6868,11 @@ var ScrollSmoother = /* @__PURE__ */ function() {
           return;
         }
         ScrollSmoother2.isRefreshing = true;
-        if (effects) {
+        if (effects2) {
           var _pins = ScrollTrigger3.getAll().filter(function(st) {
             return !!st.pin;
           });
-          effects.forEach(function(st) {
+          effects2.forEach(function(st) {
             if (!st.vars.pinnedContainer) {
               _pins.forEach(function(pinST) {
                 if (pinST.pin.contains(st.trigger)) {
@@ -6983,7 +6983,7 @@ var ScrollSmoother = /* @__PURE__ */ function() {
       _this.paused(false);
       killScrub(mainST);
       mainST.kill();
-      var triggers = (effects || []).concat(sections || []), i = triggers.length;
+      var triggers = (effects2 || []).concat(sections || []), i = triggers.length;
       while (i--) {
         triggers[i].kill();
       }
@@ -7089,21 +7089,21 @@ if (document.readyState === "loading") {
 var DEFAULT_SMOOTH = 2;
 function gsapInit() {
   let smoothContent = document.querySelector(".page-wrapper");
-  console.log("smoothContent:", smoothContent);
   let smooth = smoothContent.dataset.smooth;
   if (smooth === void 0) {
     smooth = Number(DEFAULT_SMOOTH);
   }
-  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (!mediaQuery.matches) {
+  let effects2 = true;
+  const motionMediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (!motionMediaQuery.matches) {
     createSmoother(Number(smooth));
   }
   ;
-  mediaQuery.addEventListener("change", () => {
-    console.log(mediaQuery.media, mediaQuery.matches);
-    if (mediaQuery.matches && smoother) {
+  motionMediaQuery.addEventListener("change", () => {
+    if (motionMediaQuery.matches && smoother) {
       smoother.kill();
-    } else if (!mediaQuery.matches) {
+      effects2 = false;
+    } else if (!motionMediaQuery.matches) {
       createSmoother(Number(smooth));
     }
   });
@@ -7128,21 +7128,19 @@ function gsapInit() {
   observer.observe(smoothContent, config);
 }
 function createSmoother(smooth) {
-  console.log("Creating smoother...");
   smoother = ScrollSmoother.create({
     wrapper: ".site-wrapper",
     content: ".page-wrapper",
     smooth,
-    effects: true
+    effects
   });
-  console.log("Smoother:", smoother);
 }
 translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - document.querySelector(".anouncement-bar").offsetHeight / 2;
 import_gsap.gsap.to(".navbar_brand", {
   translateY: () => translate + "px",
   scrollTrigger: {
-    trigger: "#smooth-wrapper",
-    start: "top top",
+    trigger: ".site-wrapper",
+    start: "clamp(top top)",
     end: () => "+=" + document.querySelector("body").offsetHeight + "px + bottom",
     scrub: true
   }

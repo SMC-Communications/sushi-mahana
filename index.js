@@ -27,20 +27,20 @@ if (document.readyState === "loading") {
 
 function gsapInit() {
     let smoothContent = document.querySelector('.page-wrapper');
-    console.log("smoothContent:", smoothContent)
     let smooth = smoothContent.dataset.smooth;
     if (smooth === undefined) {
         smooth = Number(DEFAULT_SMOOTH);
     }
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!mediaQuery.matches){
+    let effects = true
+    const motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!motionMediaQuery.matches){
         createSmoother(Number(smooth))
     };
-    mediaQuery.addEventListener('change', () => {
-        console.log(mediaQuery.media, mediaQuery.matches);
-        if (mediaQuery.matches && smoother) {
+    motionMediaQuery.addEventListener('change', () => {
+        if (motionMediaQuery.matches && smoother) {
             smoother.kill();
-        } else if (!mediaQuery.matches) {
+            effects = false
+        } else if (!motionMediaQuery.matches) {
             createSmoother(Number(smooth));
         }
     });
@@ -68,34 +68,35 @@ function gsapInit() {
 }
 
 function createSmoother(smooth){
-    console.log("Creating smoother...")
     smoother = ScrollSmoother.create({
         wrapper: ".site-wrapper",
         content: ".page-wrapper",
         smooth: smooth,
-        effects: true
+        effects: effects
     });
-    console.log("Smoother:", smoother)
 }
-translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - (document.querySelector(".anouncement-bar").offsetHeight /2)
-gsap.to(".navbar_brand", {
-    translateY: () => translate + "px",
 
-    scrollTrigger:{
-      trigger:"#smooth-wrapper",
-      start:"top top",
-      end: () => "+=" + document.querySelector("body").offsetHeight + "px + bottom",
-      scrub:true,
-    }
-  })
-gsap.to(".navbar_brand", {
-    color:"#000",
-    scrollTrigger:{
-        trigger:".footer",
-        end: () => "+=" + document.querySelector(".navbar_brand").offsetHeight + "px",
+translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - (document.querySelector(".anouncement-bar").offsetHeight /2)
+
+    gsap.to(".navbar_brand", {
+        translateY: () => translate + "px",
+
+        scrollTrigger:{
+        trigger:".site-wrapper",
+        start:"clamp(top top)",
+        end: () => "+=" + document.querySelector("body").offsetHeight + "px + bottom",
         scrub:true,
-    }
-})
+        }
+    })
+    gsap.to(".navbar_brand", {
+        color:"#000",
+        scrollTrigger:{
+            trigger:".footer",
+            end: () => "+=" + document.querySelector(".navbar_brand").offsetHeight + "px",
+            scrub:true,
+        }
+    })
+
 const spacers = gsap.utils.toArray([".spacer_small", ".spacer_medium"])
 
 spacers.forEach((spacer) => {
