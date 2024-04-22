@@ -24,14 +24,14 @@ if (document.readyState === "loading") {
   }
 
   const DEFAULT_SMOOTH = 2;
-
+  let effects
 function gsapInit() {
     let smoothContent = document.querySelector('.page-wrapper');
     let smooth = smoothContent.dataset.smooth;
     if (smooth === undefined) {
         smooth = Number(DEFAULT_SMOOTH);
     }
-    let effects = true
+    effects = true
     const motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (!motionMediaQuery.matches){
         createSmoother(Number(smooth))

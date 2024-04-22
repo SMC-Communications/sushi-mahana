@@ -7087,13 +7087,14 @@ if (document.readyState === "loading") {
   gsapInit();
 }
 var DEFAULT_SMOOTH = 2;
+var effects;
 function gsapInit() {
   let smoothContent = document.querySelector(".page-wrapper");
   let smooth = smoothContent.dataset.smooth;
   if (smooth === void 0) {
     smooth = Number(DEFAULT_SMOOTH);
   }
-  let effects2 = true;
+  effects = true;
   const motionMediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!motionMediaQuery.matches) {
     createSmoother(Number(smooth));
@@ -7102,7 +7103,7 @@ function gsapInit() {
   motionMediaQuery.addEventListener("change", () => {
     if (motionMediaQuery.matches && smoother) {
       smoother.kill();
-      effects2 = false;
+      effects = false;
     } else if (!motionMediaQuery.matches) {
       createSmoother(Number(smooth));
     }
