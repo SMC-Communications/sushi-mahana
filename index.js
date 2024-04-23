@@ -104,7 +104,7 @@ const spacers = gsap.utils.toArray([".spacer_small", ".spacer_medium"])
 
 spacers.forEach((spacer) => {
     gsap.to(spacer,{
-        scaleY:"0",
+        scaleY:"1",
         duration:Math.round(spacer.offsetHeight / 50),
         ease:"expo.out",
         scrollTrigger:{
