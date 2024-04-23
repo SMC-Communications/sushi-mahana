@@ -5,17 +5,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 /* The following plugin is a Club GSAP perk */
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 
-
 gsap.registerPlugin(ScrollTrigger,ScrollSmoother);
 
+/* === DEVELOPMENT FLAGS ===*/
 let isDevMode = false
-//let href = window.location.href
 if (href.search("webflow") >= 0) {
     console.log("DEVELOPMENT ENVIRONMENT")
     isDevMode = true;
 }
 
-let smoother
+/* === GSAP ScrollSmoother === */
+let smoother, effects
+const DEFAULT_SMOOTH = 2;
 
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", gsapInit);
@@ -23,8 +24,6 @@ if (document.readyState === "loading") {
     gsapInit();
   }
 
-  const DEFAULT_SMOOTH = 2;
-  let effects
 function gsapInit() {
     let smoothContent = document.querySelector('.page-wrapper');
     let smooth = smoothContent.dataset.smooth;
@@ -45,6 +44,7 @@ function gsapInit() {
         }
     });
 
+    // Observe changes to data-speed made in DevTools and restart the smoother
     const config = { attributeFilter: ['data-speed', 'data-smooth'], attributeOldValue: true, subtree: true };
     const callback = (mutationList, observer) => {
     for (const mutation of mutationList) {
@@ -62,7 +62,6 @@ function gsapInit() {
         }
     }
     };
-
     const observer = new MutationObserver(callback);
     observer.observe(smoothContent, config);
 }
@@ -72,10 +71,13 @@ function createSmoother(smooth){
         wrapper: ".site-wrapper",
         content: ".page-wrapper",
         smooth: smooth,
-        effects: effects
+        smoothTouch: 0.1,
+        effects: effects,
+        normalizeScroll: true
     });
 }
 
+/* === Logo movment & color change === */
 translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - (document.querySelector(".anouncement-bar").offsetHeight /2)
 
     gsap.to(".navbar_brand", {
@@ -97,17 +99,53 @@ translate = window.innerHeight - document.querySelector(".navbar_brand").offsetH
         }
     })
 
+/* === Animate spacers ===*/
 const spacers = gsap.utils.toArray([".spacer_small", ".spacer_medium"])
 
 spacers.forEach((spacer) => {
     gsap.to(spacer,{
-        scaleY:"1",
+        scaleY:"0",
         duration:Math.round(spacer.offsetHeight / 50),
-        delay:0.5,
         ease:"expo.out",
         scrollTrigger:{
             trigger:spacer,
-            start:"clamp(top 60%)"     
+            start:"clamp(top 40%)"     
         }
     })
 })
+
+/* === Smoth scroll to anchor links ===*/
+window.onload = (event) => {
+    let urlHash = window.location.href.split("#")[1];
+    let scrollElem = document.querySelector("#" + urlHash);
+  
+    if (urlHash && scrollElem) {
+      gsap.to(smoother, {
+        scrollTop: smoother.offset(scrollElem, "top top"),
+        duration: 1
+      });
+    }
+  };
+
+/* === Stop scroll while nav open === */
+const overlay = document.querySelector(".w-nav-overlay")
+let open = false
+const config = { attributeFilter: ['style'], attributeOldValue: true };
+    const checkOverlayState = (mutationList, observer) => {
+    for (const mutation of mutationList) {
+        if (mutation.oldValue && (mutation.oldValue.search("display") > -1)){
+            if (!open){
+                console.log("OPEN")
+                open = true
+                smoother.paused(true)
+            } else if (open){
+                console.log("CLOSED")
+                open = false
+                smoother.paused(false)
+            }
+        }
+    }
+    };
+
+    const observer = new MutationObserver(checkOverlayState);
+    observer.observe(overlay, config);

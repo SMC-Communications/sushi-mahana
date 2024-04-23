@@ -663,14 +663,14 @@ var require_gsap = __commonJS({
         animation.scrollTrigger && animation.scrollTrigger.kill(!!_reverting);
         animation.progress() < 1 && _callback3(animation, "onInterrupt");
         return animation;
-      }, _quickTween, _registerPluginQueue = [], _createPlugin = function _createPlugin2(config) {
-        if (!config)
+      }, _quickTween, _registerPluginQueue = [], _createPlugin = function _createPlugin2(config2) {
+        if (!config2)
           return;
-        config = !config.name && config["default"] || config;
-        if (_windowExists5() || config.headless) {
-          var name = config.name, isFunc = _isFunction3(config), Plugin = name && !isFunc && config.init ? function() {
+        config2 = !config2.name && config2["default"] || config2;
+        if (_windowExists5() || config2.headless) {
+          var name = config2.name, isFunc = _isFunction3(config2), Plugin = name && !isFunc && config2.init ? function() {
             this._props = [];
-          } : config, instanceDefaults = {
+          } : config2, instanceDefaults = {
             init: _emptyFunc,
             render: _renderPropTweens,
             add: _addPropTween,
@@ -685,23 +685,23 @@ var require_gsap = __commonJS({
             register: 0
           };
           _wake();
-          if (config !== Plugin) {
+          if (config2 !== Plugin) {
             if (_plugins[name]) {
               return;
             }
-            _setDefaults3(Plugin, _setDefaults3(_copyExcluding(config, instanceDefaults), statics));
-            _merge(Plugin.prototype, _merge(instanceDefaults, _copyExcluding(config, statics)));
+            _setDefaults3(Plugin, _setDefaults3(_copyExcluding(config2, instanceDefaults), statics));
+            _merge(Plugin.prototype, _merge(instanceDefaults, _copyExcluding(config2, statics)));
             _plugins[Plugin.prop = name] = Plugin;
-            if (config.targetTest) {
+            if (config2.targetTest) {
               _harnessPlugins.push(Plugin);
               _reservedProps[name] = 1;
             }
             name = (name === "css" ? "CSS" : name.charAt(0).toUpperCase() + name.substr(1)) + "Plugin";
           }
           _addGlobal(name, Plugin);
-          config.register && config.register(gsap5, Plugin, PropTween);
+          config2.register && config2.register(gsap5, Plugin, PropTween);
         } else {
-          _registerPluginQueue.push(config);
+          _registerPluginQueue.push(config2);
         }
       }, _255 = 255, _colorLookup = {
         aqua: [0, _255, _255],
@@ -932,8 +932,8 @@ var require_gsap = __commonJS({
         }
         return obj;
       }, _valueInParentheses = function _valueInParentheses2(value) {
-        var open = value.indexOf("(") + 1, close = value.indexOf(")"), nested = value.indexOf("(", open);
-        return value.substring(open, ~nested && nested < close ? value.indexOf(")", close + 1) : close);
+        var open2 = value.indexOf("(") + 1, close = value.indexOf(")"), nested = value.indexOf("(", open2);
+        return value.substring(open2, ~nested && nested < close ? value.indexOf(")", close + 1) : close);
       }, _configEaseFromString = function _configEaseFromString2(name) {
         var split = (name + "").split("("), ease = _easeMap[split[0]];
         return ease && split.length > 1 && ease.config ? ease.config.apply(null, ~name.indexOf("{") ? [_parseObjectInString(split[1])] : _valueInParentheses(name).split(",").map(_numericIfPossible)) : _easeMap._CE && _customEaseExp.test(name) ? _easeMap._CE("", name) : ease;
@@ -1046,7 +1046,7 @@ var require_gsap = __commonJS({
       });
       _insertEase("Back", _configBack("in"), _configBack("out"), _configBack());
       _easeMap.SteppedEase = _easeMap.steps = _globals.SteppedEase = {
-        config: function config(steps, immediateStart) {
+        config: function config2(steps, immediateStart) {
           if (steps === void 0) {
             steps = 1;
           }
@@ -1189,17 +1189,17 @@ var require_gsap = __commonJS({
           var parent = this.parent || this._dp;
           return !parent ? this._tTime : wrapRepeats && (!this._ts || this._repeat && this._time && this.totalProgress() < 1) ? this._tTime % (this._dur + this._rDelay) : !this._ts ? this._tTime : _parentToChildTotalTime(parent.rawTime(wrapRepeats), this);
         };
-        _proto.revert = function revert(config) {
-          if (config === void 0) {
-            config = _revertConfig;
+        _proto.revert = function revert(config2) {
+          if (config2 === void 0) {
+            config2 = _revertConfig;
           }
           var prevIsReverting = _reverting;
-          _reverting = config;
+          _reverting = config2;
           if (this._initted || this._startAt) {
-            this.timeline && this.timeline.revert(config);
-            this.totalTime(-0.01, config.suppressEvents);
+            this.timeline && this.timeline.revert(config2);
+            this.totalTime(-0.01, config2.suppressEvents);
           }
-          this.data !== "nested" && config.kill !== false && this.kill();
+          this.data !== "nested" && config2.kill !== false && this.kill();
           _reverting = prevIsReverting;
           return this;
         };
@@ -2664,8 +2664,8 @@ var require_gsap = __commonJS({
             }
           }
         };
-        _proto5.revert = function revert(config) {
-          this.kill(config || {});
+        _proto5.revert = function revert(config2) {
+          this.kill(config2 || {});
         };
         return Context2;
       }();
@@ -2702,8 +2702,8 @@ var require_gsap = __commonJS({
           });
           return this;
         };
-        _proto6.revert = function revert(config) {
-          this.kill(config || {});
+        _proto6.revert = function revert(config2) {
+          this.kill(config2 || {});
         };
         _proto6.kill = function kill(revert) {
           this.contexts.forEach(function(c) {
@@ -2717,8 +2717,8 @@ var require_gsap = __commonJS({
           for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
             args[_key2] = arguments[_key2];
           }
-          args.forEach(function(config) {
-            return _createPlugin(config);
+          args.forEach(function(config2) {
+            return _createPlugin(config2);
           });
         },
         timeline: function timeline(vars) {
@@ -2775,7 +2775,7 @@ var require_gsap = __commonJS({
           value && value.ease && (value.ease = _parseEase(value.ease, _defaults2.ease));
           return _mergeDeep(_defaults2, value || {});
         },
-        config: function config(value) {
+        config: function config2(value) {
           return _mergeDeep(_config, value || {});
         },
         registerEffect: function registerEffect(_ref3) {
@@ -5830,10 +5830,10 @@ var ScrollTrigger2 = /* @__PURE__ */ function() {
     }
     return _coreInitted2;
   };
-  ScrollTrigger4.defaults = function defaults(config) {
-    if (config) {
-      for (var p in config) {
-        _defaults[p] = config[p];
+  ScrollTrigger4.defaults = function defaults(config2) {
+    if (config2) {
+      for (var p in config2) {
+        _defaults[p] = config2[p];
       }
     }
     return _defaults;
@@ -5953,7 +5953,7 @@ var ScrollTrigger2 = /* @__PURE__ */ function() {
       }
     }
   };
-  ScrollTrigger4.config = function config(vars) {
+  ScrollTrigger4.config = function config2(vars) {
     "limitCallbacks" in vars && (_limitCallbacks = !!vars.limitCallbacks);
     var ms = vars.syncInterval;
     ms && clearInterval(_syncInterval) || (_syncInterval = ms) && setInterval(_sync, ms);
@@ -6073,12 +6073,12 @@ ScrollTrigger2.batch = function(targets, vars) {
     });
   }
   _toArray(targets).forEach(function(target) {
-    var config = {};
+    var config2 = {};
     for (p in varsCopy) {
-      config[p] = varsCopy[p];
+      config2[p] = varsCopy[p];
     }
-    config.trigger = target;
-    result.push(ScrollTrigger2.create(config));
+    config2.trigger = target;
+    result.push(ScrollTrigger2.create(config2));
   });
   return result;
 };
@@ -6758,7 +6758,7 @@ var ScrollSmoother = /* @__PURE__ */ function() {
       }
       return wrapper;
     };
-    this.effects = function(targets, config) {
+    this.effects = function(targets, config2) {
       var _effects;
       effects2 || (effects2 = []);
       if (!targets) {
@@ -6771,17 +6771,17 @@ var ScrollSmoother = /* @__PURE__ */ function() {
           effects2[i2].trigger === target && effects2[i2].kill();
         }
       });
-      config = config || {};
-      var _config = config, speed2 = _config.speed, lag = _config.lag, effectsPadding = _config.effectsPadding, effectsToAdd = [], i, st;
+      config2 = config2 || {};
+      var _config = config2, speed2 = _config.speed, lag = _config.lag, effectsPadding = _config.effectsPadding, effectsToAdd = [], i, st;
       for (i = 0; i < targets.length; i++) {
         st = createEffect(targets[i], speed2, lag, i, effectsPadding);
         st && effectsToAdd.push(st);
       }
       (_effects = effects2).push.apply(_effects, effectsToAdd);
-      config.refresh !== false && ScrollTrigger3.refresh();
+      config2.refresh !== false && ScrollTrigger3.refresh();
       return effectsToAdd;
     };
-    this.sections = function(targets, config) {
+    this.sections = function(targets, config2) {
       var _sections;
       sections || (sections = []);
       if (!targets) {
@@ -6798,7 +6798,7 @@ var ScrollSmoother = /* @__PURE__ */ function() {
           }
         });
       });
-      config && config.add ? (_sections = sections).push.apply(_sections, newSections) : sections = newSections.slice(0);
+      config2 && config2.add ? (_sections = sections).push.apply(_sections, newSections) : sections = newSections.slice(0);
       return newSections;
     };
     this.content(vars.content);
@@ -7081,13 +7081,13 @@ if (href.search("webflow") >= 0) {
   isDevMode = true;
 }
 var smoother;
+var effects;
+var DEFAULT_SMOOTH = 2;
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", gsapInit);
 } else {
   gsapInit();
 }
-var DEFAULT_SMOOTH = 2;
-var effects;
 function gsapInit() {
   let smoothContent = document.querySelector(".page-wrapper");
   let smooth = smoothContent.dataset.smooth;
@@ -7108,8 +7108,8 @@ function gsapInit() {
       createSmoother(Number(smooth));
     }
   });
-  const config = { attributeFilter: ["data-speed", "data-smooth"], attributeOldValue: true, subtree: true };
-  const callback = (mutationList, observer2) => {
+  const config2 = { attributeFilter: ["data-speed", "data-smooth"], attributeOldValue: true, subtree: true };
+  const callback = (mutationList, observer3) => {
     for (const mutation of mutationList) {
       if (mutation.type === "attributes") {
         if (mutation.attributeName === "data-smooth") {
@@ -7125,15 +7125,17 @@ function gsapInit() {
       }
     }
   };
-  const observer = new MutationObserver(callback);
-  observer.observe(smoothContent, config);
+  const observer2 = new MutationObserver(callback);
+  observer2.observe(smoothContent, config2);
 }
 function createSmoother(smooth) {
   smoother = ScrollSmoother.create({
     wrapper: ".site-wrapper",
     content: ".page-wrapper",
     smooth,
-    effects
+    smoothTouch: 0.1,
+    effects,
+    normalizeScroll: true
   });
 }
 translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - document.querySelector(".anouncement-bar").offsetHeight / 2;
@@ -7157,16 +7159,45 @@ import_gsap.gsap.to(".navbar_brand", {
 var spacers = import_gsap.gsap.utils.toArray([".spacer_small", ".spacer_medium"]);
 spacers.forEach((spacer) => {
   import_gsap.gsap.to(spacer, {
-    scaleY: "1",
+    scaleY: "0",
     duration: Math.round(spacer.offsetHeight / 50),
-    delay: 0.5,
     ease: "expo.out",
     scrollTrigger: {
       trigger: spacer,
-      start: "clamp(top 60%)"
+      start: "clamp(top 40%)"
     }
   });
 });
+window.onload = (event) => {
+  let urlHash = window.location.href.split("#")[1];
+  let scrollElem = document.querySelector("#" + urlHash);
+  if (urlHash && scrollElem) {
+    import_gsap.gsap.to(smoother, {
+      scrollTop: smoother.offset(scrollElem, "top top"),
+      duration: 1
+    });
+  }
+};
+var overlay = document.querySelector(".w-nav-overlay");
+var open = false;
+var config = { attributeFilter: ["style"], attributeOldValue: true };
+var checkOverlayState = (mutationList, observer2) => {
+  for (const mutation of mutationList) {
+    if (mutation.oldValue && mutation.oldValue.search("display") > -1) {
+      if (!open) {
+        console.log("OPEN");
+        open = true;
+        smoother.paused(true);
+      } else if (open) {
+        console.log("CLOSED");
+        open = false;
+        smoother.paused(false);
+      }
+    }
+  }
+};
+var observer = new MutationObserver(checkOverlayState);
+observer.observe(overlay, config);
 /*! Bundled license information:
 
 gsap/dist/gsap.js:
