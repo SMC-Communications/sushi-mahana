@@ -99,18 +99,52 @@ translate = window.innerHeight - document.querySelector(".navbar_brand").offsetH
         }
     })
 
+// Animation Pace
+const pace = 0.5
 
-/* === Animate spacers ===*/
-const spacers = gsap.utils.toArray([".spacer_small", ".spacer_medium"])
+const fadeIn = gsap.utils.toArray(".fade-in:not(.scroll-trigger)[data-order]")
+fadeIn.forEach((elem) => {
+    let delay = Number(elem.dataset.order) * pace
+    gsap.to(elem, {
+        opacity:"1",
+        delay: delay,
+        duration:pace,
+    })
+})
+const timedSpacers = gsap.utils.toArray("[timed-spacer][data-order]")
+timedSpacers.forEach((spacer) => {
+    let delay = Number(spacer.dataset.order) * pace
+    gsap.to(spacer, {
+        scaleY:"1",
+        ease:"expo.out",
+        delay: delay,
+        duration:pace,
+    })
+})
+/* === ScrollTrigger fade-in ===*/
+const scrollFadeIn = gsap.utils.toArray(".fade-in.scroll-trigger")
 
+scrollFadeIn.forEach((elem)=> {
+    gsap.to(elem, {
+        opacity:"1",
+        duration: pace,
+        scrollTrigger:{
+            trigger:elem,
+            start:"clamp(top 50%)"
+        }
+    })
+})
+/* === Scroll Triggered spacers ===*/
+const spacers = gsap.utils.toArray([".spacer_small:not([timed-spacer])", ".spacer_medium:not([timed-spacer])"])
+console.log(spacers)
 spacers.forEach((spacer) => {
     gsap.to(spacer,{
         scaleY:"1",
-        duration:Math.round(spacer.offsetHeight / 50),
+        duration:pace,
         ease:"expo.out",
         scrollTrigger:{
             trigger:spacer,
-            start:"clamp(top 40%)"     
+            start:"clamp(top 50%)"     
         }
     })
 })

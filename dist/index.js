@@ -7156,15 +7156,47 @@ import_gsap.gsap.to(".navbar_brand", {
     scrub: true
   }
 });
-var spacers = import_gsap.gsap.utils.toArray([".spacer_small", ".spacer_medium"]);
+var pace = 0.5;
+var fadeIn = import_gsap.gsap.utils.toArray(".fade-in:not(.scroll-trigger)[data-order]");
+fadeIn.forEach((elem) => {
+  let delay = Number(elem.dataset.order) * pace;
+  import_gsap.gsap.to(elem, {
+    opacity: "1",
+    delay,
+    duration: pace
+  });
+});
+var timedSpacers = import_gsap.gsap.utils.toArray("[timed-spacer][data-order]");
+timedSpacers.forEach((spacer) => {
+  let delay = Number(spacer.dataset.order) * pace;
+  import_gsap.gsap.to(spacer, {
+    scaleY: "1",
+    ease: "expo.out",
+    delay,
+    duration: pace
+  });
+});
+var scrollFadeIn = import_gsap.gsap.utils.toArray(".fade-in.scroll-trigger");
+scrollFadeIn.forEach((elem) => {
+  import_gsap.gsap.to(elem, {
+    opacity: "1",
+    duration: pace,
+    scrollTrigger: {
+      trigger: elem,
+      start: "clamp(top 50%)"
+    }
+  });
+});
+var spacers = import_gsap.gsap.utils.toArray([".spacer_small:not([timed-spacer])", ".spacer_medium:not([timed-spacer])"]);
+console.log(spacers);
 spacers.forEach((spacer) => {
   import_gsap.gsap.to(spacer, {
     scaleY: "1",
-    duration: Math.round(spacer.offsetHeight / 50),
+    duration: pace,
     ease: "expo.out",
     scrollTrigger: {
       trigger: spacer,
-      start: "clamp(top 40%)"
+      start: "clamp(top 50%)"
     }
   });
 });
