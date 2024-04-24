@@ -99,6 +99,7 @@ translate = window.innerHeight - document.querySelector(".navbar_brand").offsetH
         }
     })
 
+
 /* === Animate spacers ===*/
 const spacers = gsap.utils.toArray([".spacer_small", ".spacer_medium"])
 
