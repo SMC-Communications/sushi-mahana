@@ -7133,7 +7133,6 @@ function createSmoother(smooth) {
     wrapper: ".site-wrapper",
     content: ".page-wrapper",
     smooth,
-    smoothTouch: 0.1,
     effects
   });
 }
