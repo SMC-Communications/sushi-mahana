@@ -72,8 +72,7 @@ function createSmoother(smooth){
         content: ".page-wrapper",
         smooth: smooth,
         smoothTouch: 0.1,
-        effects: effects,
-        normalizeScroll: true
+        effects: effects
     });
 }
 

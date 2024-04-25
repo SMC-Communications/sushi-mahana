@@ -7134,8 +7134,7 @@ function createSmoother(smooth) {
     content: ".page-wrapper",
     smooth,
     smoothTouch: 0.1,
-    effects,
-    normalizeScroll: true
+    effects
   });
 }
 translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - document.querySelector(".anouncement-bar").offsetHeight / 2;
