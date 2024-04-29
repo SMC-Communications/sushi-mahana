@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sushimahana-dev-08991-authRole",
+      "UnauthRoleArn": "arn:aws:iam::168263132648:role/amplify-sushimahana-dev-08991-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::168263132648:role/amplify-sushimahana-dev-08991-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-sushimahana-dev-08991-deployment",
+      "UnauthRoleName": "amplify-sushimahana-dev-08991-unauthRole",
+      "StackName": "amplify-sushimahana-dev-08991",
+      "StackId": "arn:aws:cloudformation:us-west-2:168263132648:stack/amplify-sushimahana-dev-08991/1c9c51e0-067d-11ef-a577-0a535adad307",
+      "AmplifyAppId": "d24xd1s203vh6g"
+    }
+  }
+}
