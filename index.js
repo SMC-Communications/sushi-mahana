@@ -1,4 +1,4 @@
-//CI/CD
+//npm ci
 
 import { gsap } from "gsap";
     
