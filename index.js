@@ -1,4 +1,4 @@
-//npm ci
+//public
 
 import { gsap } from "gsap";
     
