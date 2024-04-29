@@ -13,7 +13,13 @@ if (href.search("webflow") >= 0) {
     console.log("DEVELOPMENT ENVIRONMENT")
     isDevMode = true;
 }
-
+/* === NAV CLOSE === */
+const mobileMediaQuery = window.matchMedia('(max-width:991px)');
+    if (mobileMediaQuery.matches){
+       $('.w-nav-menu').on('click', 'a', function() {
+            $('.w-nav-button').triggerHandler('tap');
+          });
+    };
 /* === GSAP ScrollSmoother === */
 let smoother, effects
 const DEFAULT_SMOOTH = 2;

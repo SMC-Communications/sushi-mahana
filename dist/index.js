@@ -7080,6 +7080,12 @@ if (href.search("webflow") >= 0) {
   console.log("DEVELOPMENT ENVIRONMENT");
   isDevMode = true;
 }
+var mobileMediaQuery = window.matchMedia("(max-width:991px)");
+if (mobileMediaQuery.matches) {
+  $(".w-nav-menu").on("click", "a", function() {
+    $(".w-nav-button").triggerHandler("tap");
+  });
+}
 var smoother;
 var effects;
 var DEFAULT_SMOOTH = 2;
