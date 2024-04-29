@@ -7142,11 +7142,11 @@ function createSmoother(smooth) {
     effects
   });
 }
-var announcemenBarHeight;
+var announcementBarHeight = 0;
 if (document.querySelector(".announcement-bar")) {
-  announcemenBarHeight = document.querySelector(".announcement-bar").offsetHeight;
+  announcementBarHeight = document.querySelector(".announcement-bar").offsetHeight;
 }
-translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - announcemenBarHeight / 2;
+translate = window.innerHeight - document.querySelector(".navbar_brand").offsetHeight - announcementBarHeight / 2;
 import_gsap.gsap.to(".navbar_brand", {
   translateY: () => translate + "px",
   scrollTrigger: {
